@@ -24,4 +24,18 @@ for file in $files; do
     ln -s $dir/$file ~/$file
 done
 
+# we need fish already installed for this
+# because we want to install oh-my-fish
+curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/tools/install.fish | fish &
+
+mv ~/.config/fish/config.{fish,orig}
+
+ln -s $dir/fish/config.fish ~/.config/fish/config.fish
+ln -s $dir/fish/functions ~/.config/fish/functions
+ln -s $dir/fish/custom_config.load ~/.oh-my-fish/custom/custom_configuration.load
+ln -s $dir/fish/themes/sn3rd ~/.oh-my-fish/themes/sn3rd
+
+fish -c "omf install" &
+
+
 source ~/.vimrc

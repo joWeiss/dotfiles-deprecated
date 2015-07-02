@@ -1,0 +1,18 @@
+set fish_greeting ""
+set -x SHELL /usr/local/bin/fish
+set -x HOMEBREW_GITHUB_API_TOKEN 758b947c785bc9f697730a8bb1cef501e572bf1f
+set -x PATH ~/Library/Haskell/bin $PATH
+set -x PATH /usr/local/sbin $PATH
+set -x PATH /Users/jonas/.rbenv/shims $PATH
+
+#. (brew --prefix)/etc/grc.bashrc
+
+# Custom Plugins for oh-my-fish
+Plugin 'brew'
+# Plugin 'grc'
+Plugin 'osx'
+Plugin 'tmux'
+Plugin 'vi-mode'
+
+
+
