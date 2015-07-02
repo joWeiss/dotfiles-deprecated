@@ -1,0 +1,26 @@
+snippet em "Emphasize" w
+\emph{${VISUAL}${1}}
+endsnippet
+
+snippet ss* "Unnumbered subsection" s
+\subsubsection*{${1}}
+\label{${2:ssub:${1/ /_/g}}}
+endsnippet
+
+snippet today "Inserts current date" b
+`date +%d.%m.%y`
+endsnippet
+
+snippet env "Insert environment" b
+\begin{${1:itemize}}
+    $0
+\end{$1}
+endsnippet
+
+snippet tt "Description" w
+\texttt{${1:${VISUAL}}}
+endsnippet
+
+snippet gincl "Include graphics" b
+\includegraphics${1:[${2:width=\textwidth}]}{${3:imagename}}
+endsnippet

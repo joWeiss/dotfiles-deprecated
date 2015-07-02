@@ -1,0 +1,63 @@
+snippet mcal "Insert \mathcal{}" w
+\\mathcal\{${1}\}
+endsnippet
+
+snippet mcalZ "Insert \mathcal{Z}" w
+\\mathcal\{${1:${VISUAL:Z}}\}
+endsnippet
+
+snippet mrm "Insert \mathrm{}" w
+\\mathrm\{${1:${VISUAL}}\}
+endsnippet
+
+snippet mbb "Inserts \mathbb{}" w
+\\mathbb\{${1:${VISUAL}}\}
+endsnippet
+
+snippet mtt "Inserts \mathtt{}" w
+\\mathtt\{${1:${VISUAL}}\}
+endsnippet
+
+snippet frac "Inserts a latex fraction " w
+\\frac\{$1\}\{$2\}
+endsnippet
+
+snippet sum "Inserts a latex sum" w
+\\sum_\{$1\}^\{$2\}
+endsnippet
+
+snippet pmod "Inserts a \pmod{}" w
+\\pmod\{$1\}
+endsnippet
+
+snippet "\^\^" "Inserts ^{}" r
+^\{$1\}
+endsnippet
+
+snippet "__" "Inserts _{}" r
+_\{$1\}
+endsnippet
+
+snippet bar "Inserts \bar{}" w
+\\bar\{$1\}
+endsnippet
+
+snippet tt "Insert \text{}" w
+\\text\{${1:${VISUAL}}\}
+endsnippet
+
+snippet yaml "Insert a YAML Metadata header" b
+---
+title: '${1:This is the title: it contains a colon}'
+author: ${2:Jonas Weissensel}
+date: \today
+${3:abstract: |
+  This is the abstract.
+  
+  It consists of two paragraphs.}
+...
+endsnippet
+
+snippet ldrd "Insert double brackets" w
+\\ldbrack ${1} \\rdbrack
+endsnippet
