@@ -12,7 +12,5 @@ Plugin 'brew'
 Plugin 'peco'
 Plugin 'osx'
 Plugin 'tmux'
-Plugin 'vi-mode'
-
-
+#Plugin 'vi-mode'
 

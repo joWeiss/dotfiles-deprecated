@@ -22,3 +22,11 @@ set fish_custom $HOME/.oh-my-fish/custom
 Theme "sn3rd"
 
 Plugin 'theme'
+
+# needed for vi_mode plugin
+# function my_key_bindings
+#     fish_user_key_bindings
+#     bind \cr 'peco_select_history (commandline -b)'
+# end
+#
+# set -g fish_key_bindings my_key_bindings
