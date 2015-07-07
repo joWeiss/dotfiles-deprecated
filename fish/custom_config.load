@@ -9,6 +9,7 @@ set -x PATH /Users/jonas/.rbenv/shims $PATH
 # Custom Plugins for oh-my-fish
 Plugin 'brew'
 # Plugin 'grc'
+Plugin 'peco'
 Plugin 'osx'
 Plugin 'tmux'
 Plugin 'vi-mode'

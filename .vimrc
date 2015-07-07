@@ -58,6 +58,8 @@ Plugin 'Raimondi/delimitMate'
 " Plugin 'fholgado/minibufexpl.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'henrik/vim-indexed-search'
+Plugin 'rizzatti/dash.vim'
+
 
 " Extend Vim
 " vimproc
@@ -280,8 +282,8 @@ if has("gui_macvim")
     set guioptions=aAce
     set backupcopy=yes
     set fuoptions=maxvert,maxhorz
-    " set background=dark
-    set background=light
+    set background=dark
+    " set background=light
     " let base16colorspace=256
     " colorscheme base16-tomorrow
     " let g:solarized_hitrail=1
@@ -313,7 +315,8 @@ let NERDTreeDirArrows=1
 let NERDTreeShowBookmarks=1
 let NERDTreeQuitOnOpen=1 
 let NERDTreeCascadeOpenSingleChildDir=1
-map <D-E> :NERDTreeToggle<CR>:OpenBookmark .vimrc<CR>
+" map <D-E> :NERDTreeToggle<CR>:OpenBookmark .vimrc<CR>
+map <D-E> :silent tabnew ~/.vimrc<CR>
 
 " CtrlP
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
@@ -425,6 +428,14 @@ let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 
 " WMGraphviz
+
 " Thesaurus
 " download from https://www.gutenberg.org/files/3202/files/mthesaur.txt
 let g:lexical#thesaurus = ['~/.vim/thesaurus/mthesaur.txt',]
+
+" Dash
+nmap <silent> <leader>ds <Plug>DashSearch
+
+" FuGITive
+nnoremap <Leader>L :<C-u>execute 'file'.fnameescape(resolve(expand('%:p')))<bar>
+            \ call fugitive#detect(fnameescape(expand('%:p:h')))<CR>
