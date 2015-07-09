@@ -36,6 +36,7 @@ Plugin 'beloglazov/vim-online-thesaurus'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'dag/vim-fish'
 Plugin 'wannesm/wmgraphviz.vim'
+Plugin 'antoyo/vim-licenses'
 
 " Productivity Plugins
 Plugin 'scrooloose/nerdtree'
@@ -282,7 +283,7 @@ if has("gui_macvim")
     set guioptions=aAce
     set backupcopy=yes
     set fuoptions=maxvert,maxhorz
-    set background=dark
+    " set background=dark
     " set background=light
     " let base16colorspace=256
     " colorscheme base16-tomorrow
@@ -291,6 +292,11 @@ if has("gui_macvim")
     " let g:solarized_termcolors=256
     " colorscheme solarized
     " colorscheme seoul256-light
+    if (strftime("%H") < 7 && strftime("%H") > 20) == 1
+        set background=dark
+    else
+        set background=light
+    endif
     colorscheme seoul256
     " set noballoneval
     autocmd VimResized * wincmd =
@@ -439,3 +445,8 @@ nmap <silent> <leader>ds <Plug>DashSearch
 " FuGITive
 nnoremap <Leader>L :<C-u>execute 'file'.fnameescape(resolve(expand('%:p')))<bar>
             \ call fugitive#detect(fnameescape(expand('%:p:h')))<CR>
+
+" vim-licenses
+let g:licenses_authors_name = 'Weissensel, Jonas <jweissensel@mailbox.org>'
+let g:licenses_copyright_holders_name = 'Weissensel, Jonas <jweissensel@mailbox.org>'
+let g:licenses_default_commands = ['gpl', 'mit', 'apache', 'lgpl']
