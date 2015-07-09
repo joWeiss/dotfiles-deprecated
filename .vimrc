@@ -63,10 +63,10 @@ Plugin 'rizzatti/dash.vim'
 
 
 " Extend Vim
-" vimproc
 Plugin 'Shougo/vimproc.vim'
 Plugin 'vim-scripts/SyntaxRange'
 Plugin 'Shougo/vimshell.vim'
+Plugin 'sjl/vitality.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -303,8 +303,8 @@ if has("gui_macvim")
     set noshowmode
 else
     set t_Co=256
-    " set background=dark
-    set background=light
+    set background=dark
+    " set background=light
     " colorscheme Tomorrow-Night
     " colorscheme Tomorrow
     " let base16colorspace=256
