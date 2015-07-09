@@ -241,6 +241,40 @@ endfunction
 " let g:airline_symbols.branch = '⎇'
 " let g:airline_symbols.paste = 'ρ'
 " let g:airline_symbols.whitespace = 'Ξ'
+"
+
+
+"""""===================================
+"=======================================
+"" Functions
+" List all currently available mappings starting with <leader>
+function! ListLeaders()
+    silent! redir @a
+    silent! nmap <LEADER>
+    silent! redir END
+    silent! new
+    silent! put! a
+    silent! g/^s*$/d
+    silent! %s/^.*,//
+    silent! normal ggVg
+    silent! sort
+    silent! let lines = getline(1,"$")
+endfunction
+
+nmap <leader>, :source %<CR>:call ListLeaders()<CR>
+nmap <leader>so :source %<CR>
+
+" call texdoc on a package name
+" This opens a PDF with the official documentation for the package.
+function! MyTexDoc()
+    let ftype = &filetype
+    if ftype == "tex"
+        silent! execute "!texdoc <cword>"
+    endif
+endfunction
+
+nnoremap <leader>ld :call MyTexDoc()<CR>
+
 
 "color and gui
 set cursorline
@@ -292,37 +326,43 @@ if has("gui_macvim")
     " let g:solarized_termcolors=256
     " colorscheme solarized
     " colorscheme seoul256-light
-    if (strftime("%H") < 7 && strftime("%H") > 20) == 1
-        set background=dark
-    else
-        set background=light
-    endif
     colorscheme seoul256
     " set noballoneval
     autocmd VimResized * wincmd =
     set noshowmode
 else
     set t_Co=256
+    " set background=dark
+    " " set background=light
+    " " colorscheme Tomorrow-Night
+    " " colorscheme Tomorrow
+    " " let base16colorspace=256
+    " " colorscheme base16-tomorrow
+    " " let g:solarized_termtrans = 1
+    " " let g:solarized_termcolors=256
+    " " colorscheme solarized
+    " colorscheme seoul256-light
+endif
+if (strftime("%H") < 7 && strftime("%H") > 20) == 1
     set background=dark
-    " set background=light
-    " colorscheme Tomorrow-Night
-    " colorscheme Tomorrow
-    " let base16colorspace=256
-    " colorscheme base16-tomorrow
-    " let g:solarized_termtrans = 1
-    " let g:solarized_termcolors=256
-    " colorscheme solarized
-    colorscheme seoul256-light
+else
+    set background=light
 endif
 
 " NERDTree
 map <D-N> :NERDTreeToggle<CR>
+" make nerdtree behave like a split explorer
+let NERDTreeHijackNetrw=1
 let NERDTreeDirArrows=1
 let NERDTreeShowBookmarks=1
 let NERDTreeQuitOnOpen=1 
 let NERDTreeCascadeOpenSingleChildDir=1
 " map <D-E> :NERDTreeToggle<CR>:OpenBookmark .vimrc<CR>
-map <D-E> :silent tabnew ~/.vimrc<CR>
+if has("gui_macvim")
+    map <D-E> :silent tabnew ~/.vimrc<CR>
+else
+    map <leader>re :execute "edit " . ~/.vimrc<CR>
+endif
 
 " CtrlP
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
