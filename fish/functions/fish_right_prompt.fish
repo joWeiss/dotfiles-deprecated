@@ -1,5 +1,9 @@
 function fish_right_prompt
-	if test $TERM != "screen-256color"
-		battery -p
-	end
+	set multiplexer (_is_multiplexed)
+    switch $multiplexer
+        case tmux
+            printf '‹%s›' $status
+        case '*'
+            printf '‹%s›:%s' $status (battery -p)
+    end
 end
