@@ -1,5 +1,5 @@
 function git
-	if test -z $argv
+	if test -z $argv[1]
         command git $argv
     else
         set -l git_command $argv[1]

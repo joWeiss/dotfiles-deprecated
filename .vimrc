@@ -343,7 +343,7 @@ else
     " " colorscheme solarized
     " colorscheme seoul256-light
 endif
-if (strftime("%H") < 7 && strftime("%H") > 20) == 1
+if (strftime("%H") < 7 || strftime("%H") > 20) == 1
     set background=dark
 else
     set background=light
@@ -367,6 +367,7 @@ endif
 " CtrlP
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+nnoremap <D-M> :CtrlPMRUFiles<CR>
 
 " Gundo
 nnoremap <D-U> :GundoToggle<CR>
@@ -379,9 +380,20 @@ nnoremap <silent> <D-j> }
 nnoremap <silent> <D-k> {
 
 " Pandoc
+function! MBeamer()
+    let fname = expand("%:t")
+    let fnametex = expand("%:r") . '.tex'
+    silent! execute "!pandoc -s -o" . fnametex . " -Vlang=german -Vtheme:m --template mtheme.beamer -t beamer " . fname . " &"
+    silent! execute "!xelatex -shell-escape -interaction=nonstopmode " . fnametex . " &"
+    silent !
+    sleep 5
+    redraw!
+endfunction
+
 autocmd BufNewFile,BufRead *.md set filetype=pandoc
 autocmd FileType pandoc nmap ,pp :Pandoc pdf<CR>
 autocmd FileType pandoc nmap ,cp :!pandoc -s -o %:t:r.pdf -Vlang=german --variable mainfont="TeX Gyre Pagella" --latex-engine=xelatex % &<CR>:redraw!<CR>
+autocmd FileType pandoc nmap ,cb :call MBeamer()<CR>
 " autocmd FileType pandoc nmap ,cp :!pandoc -o %:t:r.pdf --variable mainfont="TeX Gyre Pagella" --latex-engine=xelatex --filter=markdown2dot % &<CR>:redraw!<CR>
 " autocmd FileType pandoc nmap ,co :w<CR>:!llpp %:t:r.pdf &<CR>
 " autocmd FileType pandoc nmap ,co :w<CR>:!mupdf %:t:r.pdf &<CR>
@@ -391,7 +403,7 @@ autocmd FileType pandoc let maplocalleader = ","
 let g:pandoc#after#modules#enabled = ["ultisnips"]
 " let g:pandoc_bibfiles = ['~/Documents/Uni/VL/Bibliography-complete.bib']
 let g:pandoc#command#autoexec_on_writes = 1
-let g:pandoc#command#autoexec_command = "Pandoc -Vlang=german pdf"
+" let g:pandoc#command#autoexec_command = "Pandoc -Vlang=german pdf"
 let g:pandoc#command#latex_engine = "xelatex"
 let g:pandoc#folding#fold_fenced_codeblocks = 1
 let g:pandoc#spell#default_langs = ["de","en"]
