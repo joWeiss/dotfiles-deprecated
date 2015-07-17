@@ -1,1 +1,2 @@
+mbeamer|-Vtheme:m beamer
 mc|pdf --template=~/Documents/GIT/pandoc-templates/default.latex
