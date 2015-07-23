@@ -23,6 +23,7 @@ Plugin 'mattr555/vim-instacode'
 Plugin 'junegunn/seoul256.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'ehamberg/vim-cute-python'
+Plugin 'kien/rainbow_parentheses.vim'
 
 " Language and syntax
 Plugin 'vim-pandoc/vim-pandoc'
@@ -57,10 +58,13 @@ Plugin 'Raimondi/delimitMate'
 " Plugin 'Shougo/neosnippet'
 " Plugin 'Shougo/neosnippet-snippets'
 " Plugin 'fholgado/minibufexpl.vim'
-Plugin 'kien/ctrlp.vim'
+" Plugin 'kien/ctrlp.vim'
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/vimfiler.vim'
+Plugin 'Shougo/neomru.vim'
 Plugin 'henrik/vim-indexed-search'
 Plugin 'rizzatti/dash.vim'
-
+Plugin 'mileszs/ack.vim'
 
 " Extend Vim
 Plugin 'Shougo/vimproc.vim'
@@ -136,7 +140,7 @@ let g:lightline = {
             \ 'colorscheme': 'wombat',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'fugitive', 'readonly', 'filename', 'modified'], ['ctrlpmark'] ]
+            \             [ 'fugitive', 'readonly', 'filename', 'modified'] ]
             \ },
             \ 'component_function': {
             \   'fugitive': 'MyFugitive',
@@ -146,8 +150,7 @@ let g:lightline = {
             \   'fileformat': 'MyFileformat',
             \   'filetype': 'MyFiletype',
             \   'fileencoding': 'MyFileencoding',
-            \   'mode': 'MyMode',
-            \   'ctrlpmark': 'CtrlPMark'
+            \   'mode': 'MyMode'
             \ },
             \ 'separator': { 'left': '', 'right': '' },
             \ 'subseparator': { 'left': '', 'right': '' }
@@ -171,8 +174,8 @@ endfunction
 
 function! MyFilename()
     let fname = expand('%:t')
-    return fname == 'ControlP' ? g:lightline.ctrlp_item :
-        \ fname =~ '__Gundo\|NERD_tree' ? '' :
+    "return fname == 'ControlP' ? g:lightline.ctrlp_item :
+    return fname =~ '__Gundo\|NERD_tree' ? '' :
         \ ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
         \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
         \ ('' != MyModified() ? ' ' . MyModified() : '')
@@ -192,39 +195,39 @@ endfunction
 
 function! MyMode()
     let fname = expand('%:t')
-    return fname == 'ControlP' ? 'CtrlP' :
-        \ fname == '__Gundo__' ? 'Gundo' :
+    "return fname == 'ControlP' ? 'CtrlP' :
+    return fname == '__Gundo__' ? 'Gundo' :
         \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
         \ fname =~ 'NERD_tree' ? 'NERDTree' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
-function! CtrlPMark()
-  if expand('%:t') =~ 'ControlP'
-    call lightline#link('iR'[g:lightline.ctrlp_regex])
-    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-          \ , g:lightline.ctrlp_next], 0)
-  else
-    return ''
-  endif
-endfunction
+" function! CtrlPMark()
+"   if expand('%:t') =~ 'ControlP'
+"     call lightline#link('iR'[g:lightline.ctrlp_regex])
+"     return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+"           \ , g:lightline.ctrlp_next], 0)
+"   else
+"     return ''
+"   endif
+" endfunction
 
-let g:ctrlp_status_func = {
-  \ 'main': 'CtrlPStatusFunc_1',
-  \ 'prog': 'CtrlPStatusFunc_2',
-  \ }
+" let g:ctrlp_status_func = {
+"   \ 'main': 'CtrlPStatusFunc_1',
+"   \ 'prog': 'CtrlPStatusFunc_2',
+"   \ }
 
-function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
-  let g:lightline.ctrlp_regex = a:regex
-  let g:lightline.ctrlp_prev = a:prev
-  let g:lightline.ctrlp_item = a:item
-  let g:lightline.ctrlp_next = a:next
-  return lightline#statusline(0)
-endfunction
+" function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+"   let g:lightline.ctrlp_regex = a:regex
+"   let g:lightline.ctrlp_prev = a:prev
+"   let g:lightline.ctrlp_item = a:item
+"   let g:lightline.ctrlp_next = a:next
+"   return lightline#statusline(0)
+" endfunction
 
-function! CtrlPStatusFunc_2(str)
-  return lightline#statusline(0)
-endfunction
+" function! CtrlPStatusFunc_2(str)
+"   return lightline#statusline(0)
+" endfunction
 " branch symbol for powerline font '' (\ue0a0)
 
 " let g:lightline = {
@@ -349,6 +352,33 @@ else
     set background=light
 endif
 
+" rainbow parentheses
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+au Syntax * RainbowParenthesesLoadChevrons
+
 " NERDTree
 map <D-N> :NERDTreeToggle<CR>
 " make nerdtree behave like a split explorer
@@ -365,9 +395,69 @@ else
 endif
 
 " CtrlP
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-nnoremap <D-M> :CtrlPMRUFiles<CR>
+" set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+" let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+" nnoremap <D-M> :CtrlPMRUFiles<CR>
+
+" vimfiler
+let g:vimfiler_as_default_explorer = 1
+
+" Unite
+let g:unite_source_history_yank_enable = 1
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
+nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file<cr>
+nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
+nnoremap <C-p>     :Unite file_rec/async<cr>
+nnoremap <leader>o :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
+nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
+nnoremap <leader>e :<C-u>Unite -no-split -buffer-name=buffer  buffer<cr>
+
+" Custom mappings for the unite buffer
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+  " Play nice with supertab
+  let b:SuperTabDisabled=1
+  " Enable navigation with control-j and control-k in insert mode
+  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+endfunction
+
+" let g:unite_source_menu_menus.git = {
+"     \ 'description' : '            gestionar repositorios git
+"         \                            ⌘ [espacio]g',
+"     \}
+" let g:unite_source_menu_menus.git.command_candidates = [
+"     \['▷ tig                                                        ⌘ ,gt',
+"         \'normal ,gt'],
+"     \['▷ git status       (Fugitive)                                ⌘ ,gs',
+"         \'Gstatus'],
+"     \['▷ git diff         (Fugitive)                                ⌘ ,gd',
+"         \'Gdiff'],
+"     \['▷ git commit       (Fugitive)                                ⌘ ,gc',
+"         \'Gcommit'],
+"     \['▷ git log          (Fugitive)                                ⌘ ,gl',
+"         \'exe "silent Glog | Unite quickfix"'],
+"     \['▷ git blame        (Fugitive)                                ⌘ ,gb',
+"         \'Gblame'],
+"     \['▷ git stage        (Fugitive)                                ⌘ ,gw',
+"         \'Gwrite'],
+"     \['▷ git checkout     (Fugitive)                                ⌘ ,go',
+"         \'Gread'],
+"     \['▷ git rm           (Fugitive)                                ⌘ ,gr',
+"         \'Gremove'],
+"     \['▷ git mv           (Fugitive)                                ⌘ ,gm',
+"         \'exe "Gmove " input("destino: ")'],
+"     \['▷ git push         (Fugitive, salida por buffer)             ⌘ ,gp',
+"         \'Git! push'],
+"     \['▷ git pull         (Fugitive, salida por buffer)             ⌘ ,gP',
+"         \'Git! pull'],
+"     \['▷ git prompt       (Fugitive, salida por buffer)             ⌘ ,gi',
+"         \'exe "Git! " input("comando git: ")'],
+"     \['▷ git cd           (Fugitive)',
+"         \'Gcd'],
+"     \]
+" nnoremap <silent>[menu]g :Unite -silent -start-insert menu:git<CR>
 
 " Gundo
 nnoremap <D-U> :GundoToggle<CR>
@@ -493,6 +583,12 @@ let g:lexical#thesaurus = ['~/.vim/thesaurus/mthesaur.txt',]
 
 " Dash
 nmap <silent> <leader>ds <Plug>DashSearch
+
+" Ack
+" use the silver searcher (ag)
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+endif
 
 " FuGITive
 nnoremap <Leader>L :<C-u>execute 'file'.fnameescape(resolve(expand('%:p')))<bar>
