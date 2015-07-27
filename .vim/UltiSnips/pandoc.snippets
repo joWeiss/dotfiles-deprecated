@@ -61,3 +61,16 @@ endsnippet
 snippet ldrd "Insert double brackets" w
 \\ldbrack ${1} \\rdbrack
 endsnippet
+
+snippet brief "Description" b
+---
+to:
+- ${1:Empfänger}
+- ${2:Straße ##}
+- ${3:PLZ} ${4:Stadt}
+${5:subject: ${6:Betreff}}
+opening: ${7:Sehr geehrte Damen und Herren}
+closing: ${8:Mit freundlichen Grüßen}
+${9:cc: ${10}}
+...
+endsnippet

@@ -14,6 +14,7 @@ Plugin 'gmarik/Vundle.vim'
 " Interface & Color
 " Plugin 'bling/vim-airline'
 Plugin 'itchyny/lightline.vim'
+Plugin 'ap/vim-buftabline'
 Plugin 'tomasr/molokai'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'chriskempson/base16-vim'
@@ -344,7 +345,7 @@ else
     " " let g:solarized_termtrans = 1
     " " let g:solarized_termcolors=256
     " " colorscheme solarized
-    " colorscheme seoul256-light
+    colorscheme seoul256
 endif
 if (strftime("%H") < 7 || strftime("%H") > 20) == 1
     set background=dark

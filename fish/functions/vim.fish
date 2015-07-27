@@ -1,3 +1,3 @@
-function vim --description 'We want macvim in the terminal'
-	command mvim -v $argv
+function vim --description 'We want to use neovim'
+	command nvim $argv
 end

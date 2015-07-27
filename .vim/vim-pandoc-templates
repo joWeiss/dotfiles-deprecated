@@ -1,2 +1,4 @@
 mbeamer|-Vtheme:m beamer
 mc|pdf --template=~/Documents/GIT/pandoc-templates/default.latex
+#brief|pdf --template ~/.pandoc/templates/fenster-privat.latex
+brief|pdf --template ~/.pandoc/templates/fenster-privat.latex
