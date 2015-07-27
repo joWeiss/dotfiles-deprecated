@@ -295,6 +295,10 @@ hi clear SignColumn
 set list
 set listchars=tab:▸\ ,eol:↩︎
 
+" buftabline
+nnoremap <leader>p :bprev<CR>
+nnoremap <leader>n :bnext<CR>
+
 " Lexical stuff
 let g:lexical#spelllang = ["en", "de"]
 set spelllang = "de"
@@ -307,7 +311,7 @@ let g:indent_guides_enable_on_vim_startup = 1
 " if has('gui_running')
 " 	set t_Co=256
 " 	set background=dark
-" 	colorscheme base16-tomorrow
+" 	c-lightolorscheme base16-tomorrow
 " 	nnoremap <M-1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
 " 	nnoremap <M-2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
 " 	nnoremap <M-3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
