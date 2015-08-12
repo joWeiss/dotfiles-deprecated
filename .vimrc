@@ -39,6 +39,7 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'dag/vim-fish'
 Plugin 'wannesm/wmgraphviz.vim'
 Plugin 'antoyo/vim-licenses'
+Plugin 'scrooloose/syntastic'
 
 " Productivity Plugins
 Plugin 'scrooloose/nerdtree'
