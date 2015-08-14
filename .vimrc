@@ -520,6 +520,16 @@ endfunction
 let g:vimtex_latexmk_options = "-xelatex -shell-escape"
 let g:tex_flavor = 'latex'
 
+" vim-latex-suite
+set grepprg=grep\ -nH\ $*
+autocmd FileType tex set iskeyword+=:
+let g:Tex_DefaultTargetFormat = 'pdf'
+let g:Tex_CompileRule_pdf = 'xelatex --synctex=1 --interaction=nonstopmode -shell-escape $*'
+let g:Tex_TreatMacViewerAsUNIX = 1
+let g:Tex_ExecuteUNIXViewerInForeground = 1
+" let g:Tex_ViewRule_pdf = 'open -a /Applications/Skim.app'
+autocmd FileType tex call Tex_SetTeXCompilerTarget('View','pdf')
+
 let localleader = ","
 nnoremap <leader>q gqip
 
