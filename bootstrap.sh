@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ### vars
 dir=~/Documents/GIT/dotfiles
@@ -19,9 +19,9 @@ echo "...done"
 # move existing files in homedir to dotfiles_old, then create new symlinks
 for file in $files; do
     echo "Moving any existing dotfiles from ~ to $olddir"
-    mv ~/$file ~/Documents/GIT/dotfiles_old/
+    mv "$HOME/$file" ~/Documents/GIT/dotfiles_old/
     echo "Creating symlink to $file in home"
-    ln -s $dir/$file ~/$file
+    ln -s "$dir/$file" "$HOME/$file"
 done
 
 # we need fish already installed for this
